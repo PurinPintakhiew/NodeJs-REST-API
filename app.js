@@ -7,6 +7,7 @@ const cors = require('./config/cors');
 
 // database
 const db = require('./config/database');
+require('./models/Relationships');
 
 // route
 const AuthRoute = require('./routes/Auth');
@@ -18,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/api', AuthRoute);
 
-db.sysc()
+db.sync()
     .then((result) => {
         app.listen(8080)
     }).catch((err) => {
