@@ -5,7 +5,6 @@ const AuthController = require('../controller/AuthController');
 
 const router = express.Router();
 
-// --- version 1 ---
-
+router.post('/login', AuthController.Login);
 
 module.exports = router;
