@@ -3,7 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 
 // cors
-const cors= require('./config/cors');
+const cors = require('./config/cors');
 
 // database
 const db = require('./config/database');
@@ -24,9 +24,5 @@ app.use('/api', AuthRoute);
 
 app.use(ErrorController.get404)
 
-db.sync()
-    .then((result) => {
-        app.listen(8080)
-    }).catch((err) => {
-        console.log(err);
-    });
+// port
+app.listen(8080)

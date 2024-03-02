@@ -47,8 +47,6 @@ exports.Login = async (req, res, next) => {
     }
 }
 
-const bcrypt = require('bcryptjs');
-
 exports.Register = async (req, res, next) => {
     try {
         const { name = "", email = "", password = "" } = req.body;
