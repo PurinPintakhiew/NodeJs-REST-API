@@ -7,6 +7,7 @@ exports.login = [
 ];
 
 exports.register = [
+    body('name', 'This name is not null').notEmpty(),
     body('email', 'This email is not null').notEmpty(),
     body('email', 'Type is not email').isEmail(),
     body('password', 'This password is not null').notEmpty(),
