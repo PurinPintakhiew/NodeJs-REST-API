@@ -3,17 +3,17 @@ const express = require("express");
 const bodyParser = require("body-parser");
 
 // cors
-const cors = require('./config/cors');
+const cors = require('./configs/cors');
 
 // database
-const db = require('./config/database');
+const db = require('./configs/database');
 require('./models/Relationships');
 
 // route
 const AuthRoute = require('./routes/Auth');
 
 // controller
-const ErrorController = require('./controller/ErrorrController');
+const ErrorController = require('./controllers/ErrorrController');
 
 const app = express();
 app.use(express.json());

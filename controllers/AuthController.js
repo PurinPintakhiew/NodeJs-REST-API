@@ -82,7 +82,7 @@ exports.Register = async (req, res, next) => {
 
 exports.Logout = (req, res, next) => {
     try {
-
+        
     } catch (err) {
         console.error(err)
         return res.status(500).json({ error: 'Internal Server Error' });
