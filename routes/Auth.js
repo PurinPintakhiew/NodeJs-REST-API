@@ -11,6 +11,5 @@ const router = express.Router();
 
 router.post('/login', AuthValidate.login, Validator, AuthController.Login);
 router.post('/register', AuthValidate.register, Validator, AuthController.Register);
-// router.post('/logout', )
 
 module.exports = router;
