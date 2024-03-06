@@ -18,6 +18,22 @@ exports.All = async (req, res, next) => {
 
 exports.Update = async (req, res, next) => {
     try {
+        const id = req.params.id;
+        const name = req.body.name;
+
+        const update = await User.update({ name: name }, { where: { id: id } });
+
+        if (update) {
+            return res.status(200).json({
+                status: true,
+                message: 'Update successful'
+            });
+        } else {
+            return res.status(200).json({
+                status: false,
+                message: 'Update fail'
+            });
+        }
 
     } catch (err) {
         console.error(err)
@@ -27,7 +43,7 @@ exports.Update = async (req, res, next) => {
 
 exports.destroy = async (req, res, next) => {
     try {
-        const id = req.body.id;
+        const id = req.params.id;
         const destroy = await User.destroy({
             where: {
                 id: id
