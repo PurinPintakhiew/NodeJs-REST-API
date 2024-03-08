@@ -17,7 +17,7 @@ const UserRoute = require('./routes/User');
 const ErrorController = require('./controllers/ErrorrController');
 
 // middleware
-const Middleware = require('./middleware/Authenticate');
+const Middlewares = require('./middlewares/Authenticate');
 
 const app = express();
 app.use(express.json());
@@ -25,7 +25,7 @@ app.use(cors);
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/api', AuthRoute);
-app.use('/api', Middleware, UserRoute);
+app.use('/api', Middlewares, UserRoute);
 
 app.use(ErrorController.get404)
 
