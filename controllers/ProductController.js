@@ -39,7 +39,7 @@ class ProductController {
         }
     }
 
-    async store(req, req, next) {
+    async store(req, res, next) {
         try {
             const name = req.body.name;
             const price = req.body.price;
@@ -64,7 +64,7 @@ class ProductController {
         }
     }
 
-    async update(req, req, next) {
+    async update(req, res, next) {
         try {
             const id = req.params.id;
             const name = req.body.name;
