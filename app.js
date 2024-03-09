@@ -12,12 +12,13 @@ require('./models/Relationships');
 // route
 const AuthRoute = require('./routes/Auth');
 const UserRoute = require('./routes/User');
+const ProductRoute = require('./routes/Product');
 
 // controller
 const ErrorController = require('./controllers/ErrorController');
 
 // middleware
-const AuthenticateMiddleware  = require('./middlewares/AuthenticationMiddleware');
+const AuthenticateMiddleware = require('./middlewares/AuthenticationMiddleware');
 
 const app = express();
 app.use(express.json());
@@ -26,6 +27,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/api', AuthRoute);
 app.use('/api', AuthenticateMiddleware, UserRoute);
+app.use('/api', AuthenticateMiddleware, ProductRoute);
 
 app.use(ErrorController.get404)
 
