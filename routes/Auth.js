@@ -9,7 +9,7 @@ const AuthValidate = require('../validations/validates/AuthValidate');
 
 const router = express.Router();
 
-router.post('/login', AuthValidate.login, Validator, AuthController.Login);
-router.post('/register', AuthValidate.register, Validator, AuthController.Register);
+router.post('/login', AuthValidate.login, Validator, AuthController.login);
+router.post('/register', AuthValidate.register, Validator, AuthController.register);
 
 module.exports = router;
