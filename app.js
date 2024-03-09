@@ -14,7 +14,7 @@ const AuthRoute = require('./routes/Auth');
 const UserRoute = require('./routes/User');
 
 // controller
-const ErrorController = require('./controllers/ErrorrController');
+const ErrorController = require('./controllers/ErrorController');
 
 // middleware
 const Middlewares = require('./middlewares/Authenticate');
