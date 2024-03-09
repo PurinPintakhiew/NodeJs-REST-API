@@ -17,7 +17,7 @@ const UserRoute = require('./routes/User');
 const ErrorController = require('./controllers/ErrorController');
 
 // middleware
-const AuthenticateMiddleware  = require('./middlewares/Authenticate');
+const AuthenticateMiddleware  = require('./middlewares/AuthenticationMiddleware');
 
 const app = express();
 app.use(express.json());
