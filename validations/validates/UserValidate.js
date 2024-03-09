@@ -5,6 +5,7 @@ exports.show = [
 ];
 
 exports.update = [
+    param('id', 'This user id is not null').notEmpty(),
     body('name', 'This name is not null').notEmpty(),
 ];
 
