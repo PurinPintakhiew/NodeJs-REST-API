@@ -11,6 +11,7 @@ const UserValidate = require('../validations/validates/UserValidate');
 const router = express.Router();
 
 router.get('/users', UserController.getAll);
+router.get('/users/:id', UserValidate.show, Validator, UserController.show);
 router.put('/users/:id', UserValidate.update, Validator, UserController.update);
 router.delete('/users/:id', UserValidate.destroy, Validator, UserController.destroy);
 

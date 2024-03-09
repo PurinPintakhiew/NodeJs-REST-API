@@ -14,6 +14,29 @@ class UserController {
         }
     }
 
+    async show(req, res, next) {
+        try {
+            const id = req.params.id;
+
+            const user = await User.findOne({ where: { id: id } });
+            if (user) {
+                return res.status(200).json({
+                    status: true,
+                    data: user
+                });
+            } else {
+                return res.status(404).json({
+                    status: true,
+                    data: user,
+                    message: 'data is not found'
+                });
+            }
+        } catch (err) {
+            console.error(err)
+            return res.status(500).json({ error: 'Internal Server Error' });
+        }
+    }
+
     async update(req, res, next) {
         try {
             const id = req.params.id;
