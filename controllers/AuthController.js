@@ -9,36 +9,27 @@ class AuthController {
             const password = req.body.password || "";
 
             const user = await User.findOne({ where: { email: email } }) || null;
-            if (user) {
-                bcrypt.compare(password, user.password, async (err, result) => {
-                    if (err) {
-                        return res.status(500).json({
-                            status: false,
-                            error: err,
-                        });
-                    }
-                    else if (result) {
-                        const userData = { id: user.id, email: user.email };
-                        const accessToken = generateAccessToken(userData);
 
-                        const auth = await user.getAuth();
-                        if (auth) {
-                            auth.destroy();
-                        }
+            if (user && user.comparePassword(password)) {
+                const userData = { id: user.id, email: user.email };
+                const accessToken = generateAccessToken(userData);
 
-                        const createAuth = await user.createAuth({ token: accessToken, userId: user.id });
-                        if (createAuth) {
-                            return res.status(200).json({
-                                status: true,
-                                apiToken: accessToken
-                            });
-                        }
-                    }
-                });
+                const auth = await user.getAuth();
+                if (auth) {
+                    auth.destroy();
+                }
+
+                const createAuth = await user.createAuth({ token: accessToken, userId: user.id });
+                if (createAuth) {
+                    return res.status(200).json({
+                        status: true,
+                        apiToken: accessToken
+                    });
+                }
             } else {
-                return res.status(404).json({
+                return res.status(401).json({
                     status: false,
-                    error: 'Email not found'
+                    error: 'Invalid email or password'
                 });
             }
         } catch (err) {
