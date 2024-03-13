@@ -15,21 +15,12 @@ const Cart = db.define('cart', {
         references: {
             model: 'users',
             key: 'id'
-        }
+        },
     },
-    createdAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
-    },
-    updatedAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP')
-    }
+}, {
+    timestamps: true,
 });
 
-// Define the relationship between Cart and User
 Cart.hasOne(User, { foreignKey: 'userId', onDelete: 'cascade' });
 User.belongsTo(Cart, { foreignKey: 'userId' });
 
