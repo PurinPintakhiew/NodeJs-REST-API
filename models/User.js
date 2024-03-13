@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+const bcrypt = require('bcrypt');
 const db = require('../configs/database');
 
 const User = db.define('user', {
@@ -8,9 +9,32 @@ const User = db.define('user', {
         allowNull: false,
         primaryKey: true,
     },
-    name: Sequelize.STRING,
-    email: Sequelize.STRING,
-    password: Sequelize.TEXT,
+    name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    email: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true,
+        validate: {
+            isEmail: true,
+        },
+    },
+    password: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+        set(value) {
+            const hashedPassword = bcrypt.hashSync(value, 10);
+            this.setDataValue('password', hashedPassword);
+        },
+    },
+}, {
+    timestamps: true,
 });
 
-module.exports = User; 
+User.prototype.comparePassword = function (password) {
+    return bcrypt.compareSync(password, this.password);
+};
+
+module.exports = User;
