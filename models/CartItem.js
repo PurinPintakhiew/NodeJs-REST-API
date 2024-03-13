@@ -29,16 +29,8 @@ const CartItem = db.define('cartItem', {
         allowNull: false,
         defaultValue: 1
     },
-    createdAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
-    },
-    updatedAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP')
-    }
+}, {
+    timestamps: true,
 });
 
 module.exports = CartItem;
