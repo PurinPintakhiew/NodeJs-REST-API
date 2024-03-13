@@ -8,9 +8,20 @@ const Product = db.define('product', {
         allowNull: false,
         primaryKey: true,
     },
-    name: Sequelize.TEXT,
-    price: Sequelize.DOUBLE,
-    qty: Sequelize.INTEGER,
+    name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    price: {
+        type: Sequelize.DECIMAL(10, 2),
+        allowNull: false,
+    },
+    qty: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+    },
+}, {
+    timestamps: true
 });
 
 module.exports = Product;
