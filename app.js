@@ -7,7 +7,7 @@ const cors = require('./configs/cors');
 
 // database
 const db = require('./configs/database');
-require('./models/Relationships');
+// require('./models/Relationships');
 
 // route
 const AuthRoute = require('./routes/Auth');
