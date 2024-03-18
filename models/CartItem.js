@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const db = require('../configs/database');
+const Cart = require('./Cart');
 
 const CartItem = db.define('cartItem', {
     id: {
@@ -32,5 +33,8 @@ const CartItem = db.define('cartItem', {
 }, {
     timestamps: true,
 });
+
+CartItem.belongsTo(Cart, { foreignKey: 'cartId', onDelete: 'cascade' });
+Cart.hasMany(CartItem, { foreignKey: 'cartId' });
 
 module.exports = CartItem;
