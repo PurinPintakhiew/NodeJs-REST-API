@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const db = require('../configs/database');
-const User = require('./User'); // Import the User model
+const User = require('./User');
 
 const Cart = db.define('cart', {
     id: {
@@ -21,7 +21,7 @@ const Cart = db.define('cart', {
     timestamps: true,
 });
 
-Cart.hasOne(User, { foreignKey: 'userId', onDelete: 'cascade' });
-User.belongsTo(Cart, { foreignKey: 'userId' });
+Cart.belongsTo(User, { foreignKey: 'userId', onDelete: 'cascade' });
+User.hasMany(Cart, { foreignKey: 'userId' });
 
 module.exports = Cart;
