@@ -1,5 +1,5 @@
 const User = require('./User');
 const Auth = require('./Auth');
-
-User.hasOne(Auth, { foreignKey: 'userId', onDelete: 'cascade' });
-Auth.belongsTo(User, { foreignKey: 'userId' });
+const Product = require('./Product');
+const Cart = require('./Cart');
+const CartItem = require('./CartItem');
