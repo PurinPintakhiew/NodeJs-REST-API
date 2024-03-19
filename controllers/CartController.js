@@ -1,9 +1,14 @@
-const Cart = require('../models/Cart')
+const Cart = require('../models/Cart');
+const CartItem = require('../models/CartItem');
 
 class CartController {
     async getAll(req, res, next) {
         try {
-            const carts = await Cart.findAll();
+            const carts = await Cart.findAll({
+                include: [
+                    CartItem,
+                ]
+            });
             if (carts) {
                 return res.status(200).json({
                     status: true,
