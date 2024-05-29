@@ -3,7 +3,7 @@ const User = require('../models/User');
 class UserController {
     async getAll(req, res, next) {
         try {
-            const users = await User.findAll();
+            const users = await User.findAll({ attributes: { exclude: ['password'] } });
             return res.status(200).json({
                 status: true,
                 data: users,
@@ -18,7 +18,7 @@ class UserController {
         try {
             const id = req.params.id;
 
-            const user = await User.findOne({ where: { id: id } });
+            const user = await User.findOne({ where: { id: id }, attributes: { exclude: ['password'] } });
             if (user) {
                 return res.status(200).json({
                     status: true,
