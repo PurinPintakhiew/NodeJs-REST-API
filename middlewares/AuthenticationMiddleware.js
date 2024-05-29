@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const Auth = require('../models/Auth');
 
 class AuthenticationMiddleware {
     constructor(options) {
@@ -15,11 +16,19 @@ class AuthenticationMiddleware {
                 return res.status(404).json({ status: false, error: 'Token is null' });
             }
 
-            jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, result) => {
+            jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, async (err, user) => {
                 if (err) {
                     return res.status(403).json({ status: false, error: err });
                 }
-                next();
+                const auth = await Auth.findOne({ where: { userId: user?.id, token: token } }) || null;
+                if (auth === null) {
+                    return res.status(401).json({
+                        status: false,
+                        error: 'This token does not exist in the system.'
+                    });
+                } else {
+                    next();
+                }
             });
         } else {
             return res.status(404).json({ status: false, error: 'Authorization header is null!' });
