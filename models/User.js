@@ -25,7 +25,8 @@ const User = db.define('user', {
         type: Sequelize.TEXT,
         allowNull: false,
         set(value) {
-            const hashedPassword = bcrypt.hashSync(value, 10);
+            const saltRounds = parseInt(process.env.SALT_ROUNDS, 10);
+            const hashedPassword = bcrypt.hashSync(value, saltRounds);
             this.setDataValue('password', hashedPassword);
         },
     },
