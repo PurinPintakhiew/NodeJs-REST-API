@@ -50,8 +50,7 @@ class AuthController {
                 });
             }
 
-            const hashedPassword = await bcrypt.hash(password, parseInt(process.env.SALT_ROUNDS, 10));
-            const newUser = await User.create({ name, email, password: hashedPassword });
+            const newUser = await User.create({ name, email, password: password });
 
             if (newUser) {
                 const userData = { id: newUser.id, email: newUser.email };
@@ -61,7 +60,7 @@ class AuthController {
                 if (createAuth) {
                     return res.status(200).json({
                         status: true,
-                        apiToken: accessToken
+                        apiToken: accessToken,
                     });
                 }
             }
