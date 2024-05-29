@@ -7,6 +7,7 @@ const db = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, process.e
 
 db.authenticate()
     .then(() => {
+        // db.sync({ force: true });
         db.sync();
         console.log('Connection has been established successfully.');
     })
