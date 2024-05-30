@@ -13,6 +13,7 @@ require('./models/Relationships');
 const AuthRoute = require('./routes/Auth');
 const UserRoute = require('./routes/User');
 const ProductRoute = require('./routes/Product');
+const CartRoute = require('./routes/Cart');
 
 // controller
 const ErrorController = require('./controllers/ErrorController');
@@ -28,6 +29,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/api', AuthRoute);
 app.use('/api', AuthenticateMiddleware, UserRoute);
 app.use('/api', AuthenticateMiddleware, ProductRoute);
+app.use('/api', AuthenticateMiddleware, CartRoute);
 
 app.use(ErrorController.get404)
 
