@@ -18,7 +18,7 @@ const CartRoute = require('./routes/Cart');
 const ErrorController = require('./controllers/ErrorController');
 
 // middleware
-const AuthenticateMiddleware = require('./middlewares/AuthenticationMiddleware');
+const Middleware = require('./middlewares/Middleware');
 
 const app = express();
 app.use(express.json());
@@ -26,9 +26,9 @@ app.use(cors);
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/api', AuthRoute);
-app.use('/api', AuthenticateMiddleware, UserRoute);
-app.use('/api', AuthenticateMiddleware, ProductRoute);
-app.use('/api', AuthenticateMiddleware, CartRoute);
+app.use('/api', Middleware, UserRoute);
+app.use('/api', Middleware, ProductRoute);
+app.use('/api', Middleware, CartRoute);
 
 app.use(ErrorController.get404)
 

@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const Auth = require('../models/Auth');
 
-class AuthenticationMiddleware {
+class Middleware {
     constructor(options) {
         this.options = options || {};
     }
@@ -36,6 +36,6 @@ class AuthenticationMiddleware {
     }
 }
 
-const authenticationMiddleware = new AuthenticationMiddleware();
+const authenticationMiddleware = new Middleware();
 
 module.exports = authenticationMiddleware.authenticate.bind(authenticationMiddleware);
