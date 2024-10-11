@@ -6,7 +6,6 @@ const bodyParser = require("body-parser");
 const cors = require('./configs/cors');
 
 // database
-const db = require('./configs/database');
 require('./models/Relationships');
 
 // route
