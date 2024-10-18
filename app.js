@@ -1,9 +1,19 @@
 require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
+const rateLimit = require('express-rate-limit');
 
 // cors
 const cors = require('./configs/cors');
+
+// limiter
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 100,
+    message: 'Too many requests from this IP, please try again later.',
+    standardHeaders: true,
+    legacyHeaders: false,
+});
 
 // database
 require('./models/Relationships');
@@ -23,6 +33,7 @@ const Middleware = require('./middlewares/Middleware');
 const app = express();
 app.use(express.json());
 app.use(cors);
+app.use(limiter);
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/api', AuthRoute);
